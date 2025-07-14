@@ -1,0 +1,18 @@
+:root{
+    --bg-img: url('../img/bg-img.jpg') ;
+}
+body{
+    background-color: rgb(31, 31, 31);
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: url('../img/bg-img.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    filter: blur(1px) brightness(0.3); 
+    z-index: -1;
+}

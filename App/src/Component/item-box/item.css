@@ -1,0 +1,50 @@
+.item-div .col-md-4 {
+  background-color: rgba(77, 77, 77, 0.5);
+  padding: 20px 5px;
+  width: 340px;
+  height: 167px;
+}
+
+.item-div img {
+  width: 133px;
+  border-radius: 50%;
+  margin: 10px;
+  background-size: auto;
+}
+
+.item-det {
+  margin-top: -8px;
+}
+
+.buy-btn {
+  margin: 0;
+  width: 57px;
+  height: 27px;
+  font-size: 12px;
+}
+
+.item-div p {
+  font-size: 12px;
+  color: white;
+  height: 49px;
+  overflow: hidden;
+}
+
+.item-div h3 {
+  font-size: 16px;
+  font-weight: 600;
+}
+.nav__links .btn {
+height: 31px;
+justify-content: center;
+text-align: center;
+padding: 2.5px 10px;
+font-size: 16px;
+}
+.empty-message{
+  height: 500px;
+  text-align: center;
+  font-size: 16px;
+  color: #999;
+  margin-top: 20px;
+}

@@ -1,0 +1,43 @@
+body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+.nav {
+  padding: 0 100px;
+  background-color: rgb(49, 49, 49);
+  height: 241px;
+}
+.nav__logo {
+  width: 184px;
+}
+a{
+    text-decoration: none;
+    color: white;
+}
+.btn {
+    font-size: clamp(14px, 2vw, 18px);
+}
+.btn:hover,button:hover {
+    opacity: 0.8;
+    transition: 0.3s;
+}
+.nav__links{
+    margin-top: -0px;
+}
+
+
+
+@media screen and (max-width: 768px) {
+    .nav {
+        padding: 0 20px;
+    }
+    .nav__logo {
+        width: 140px;
+        margin-bottom: -20px;
+    }
+    form{
+        margin-bottom: 30px;
+    }
+}
