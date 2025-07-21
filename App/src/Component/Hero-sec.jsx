@@ -4,7 +4,7 @@ import Item from './item-box/item';
 const HeroSec = () => {
   return (
     <section className="hero-sec">
-      <div className="hero-content">
+      <div className="hero-content container">
         <Item />
       </div>
     </section>

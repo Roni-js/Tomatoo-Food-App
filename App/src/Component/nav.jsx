@@ -2,29 +2,25 @@ import logoImg from "../img/logo.png";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import Item from "./item-box/item.jsx";
+import { foodSearch } from "./item-box/item.jsx";
 
 const nav = () => {
 
-  const filterItems = (type) => {
-    type = type.target.getAttribute("type");
-    const items = document.querySelectorAll(".item-div");
-    items.forEach((item) => {
-      if (type === item.getAttribute("type")) {
-        item.style.display = "flex";
-      } else if (type === "all") {
-        item.style.display = "none";
-      }
-    });
+
+
+  const filterItems = () => {
+   
   };
 
+
   return (
-    <div className="nav">
+    <div className="nav ">
       <div className="container-fluid">
         <div className="row">
           <div className="col-12 d-flex flex-md-row flex-column  justify-content-between align-items-center">
             <img src={logoImg} alt="Logo" className="nav__logo" />
             <form action="" >
-                <input type="text"  className="bg-transparent border-1 border-danger rounded-1 fw-semibold" placeholder="Search Food...."/>
+                <input type="text" onChange={foodSearch}  className="bg-transparent border-1 border-danger rounded-1 fw-semibold" placeholder="Search Food...."/>
                 <button className="bg-danger text-white rounded-1 border-0" type="submit"><FontAwesomeIcon icon={faMagnifyingGlass} /></button>
             </form>
           </div>
