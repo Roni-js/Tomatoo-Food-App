@@ -8,7 +8,6 @@ import Nav from "./Component/nav.jsx";
 
 createRoot(document.getElementById("root")).render(
   <>
-    <Nav />
     <HeroSec />
   </>
 );

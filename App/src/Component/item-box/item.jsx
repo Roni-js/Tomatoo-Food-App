@@ -1,47 +1,38 @@
 import "./item.css";
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
+const BASE_URL = "http://localhost:9000";
+const Item = ({ searchTerm }) => { // Receive searchTerm prop
+  const [items, setItems] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
-const BASE_URL = "http://localhost:9000"; 
+  useEffect(() => {
+    const fetchItems = async () => {
+      setLoading(true);
+      try {
+        const response = await fetch(BASE_URL);
+        const json = await response.json();
+        setLoading(false);
+        setItems(json);
+      } catch (error) {
+        setError("Items Not Available");
+      }
+    };
+    fetchItems();
+  }, []);
 
-const Item = () => {
-
-const [items, setItems] = useState(null);
-const [loading, setLoading] = useState(false);
-const [error, setError] = useState(null);
-
-// Network Call:
-
-
-useEffect(() => {
-
-const fetchItems = async () => {
-
-  setLoading(true);
-
-try {
-   const response = await fetch(BASE_URL);
-  const json = await response.json();
-  setLoading(false);
-  setItems(json);
-} catch (error) {
-  setError("Items Not Available");
-}
-}
-fetchItems();
-}, []);
-
-
-
-  const itemData = items || [];
+  const filteredItems = items ? items.filter(item =>
+    item.type.toLowerCase().includes(searchTerm) || item.name.toLowerCase().includes(searchTerm)
+  ) : [];
 
   const itemDisplay = () => {
-    if (itemData.length === 0) {
-if(error) return <p className="text-white fs-2 text-center">{error}</p>;
-if (loading) return <p className="text-white fs-2 text-center">Loading...</p>;
+    if (filteredItems.length === 0) {
+      if (error) return <p className="text-white fs-2 text-center">{error}</p>;
+      if (loading) return <p className="text-white fs-2 text-center">Loading...</p>;
+      if (items && searchTerm) return <p className="text-white fs-2 text-center">No items match your search.</p>; // Added message for no search results
+      return null; // Or perhaps a "No items available" message if items is initially empty
     }
-
-    return itemData.map((item, index) => (
+    return filteredItems.map((item, index) => (
       <div
         key={index}
         className=" col-xxl-4 col-xl-4 col-lg-6 col-12 d-flex rounded-5 border item-div"
@@ -66,9 +57,4 @@ if (loading) return <p className="text-white fs-2 text-center">Loading...</p>;
     </div>
   );
 };
-
 export default Item;
-export const foodSearch = (e) => {
-  const typedValue = e.target.value;
-   console.log(typedValue);
-};
