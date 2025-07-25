@@ -1,7 +1,9 @@
 import "./item.css";
 import { useState, useEffect } from "react";
+
 const BASE_URL = "http://localhost:9000";
-const Item = ({ searchTerm }) => { // Receive searchTerm prop
+
+const Item = ({ searchTerm, category }) => { // Receive both searchTerm & category
   const [items, setItems] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -21,17 +23,21 @@ const Item = ({ searchTerm }) => { // Receive searchTerm prop
     fetchItems();
   }, []);
 
-  const filteredItems = items ? items.filter(item =>
-    item.type.toLowerCase().includes(searchTerm) || item.name.toLowerCase().includes(searchTerm)
-  ) : [];
+  // ✅ Filtering using both searchTerm and category
+  const filteredItems = items ? items.filter(item => {
+    const matchesSearch = item.type.toLowerCase().includes(searchTerm) || item.name.toLowerCase().includes(searchTerm);
+    const matchesCategory = category === "all" || category === "" || item.type.toLowerCase() === category.toLowerCase();
+    return matchesSearch && matchesCategory;
+  }) : [];
 
   const itemDisplay = () => {
     if (filteredItems.length === 0) {
       if (error) return <p className="text-white fs-2 text-center">{error}</p>;
       if (loading) return <p className="text-white fs-2 text-center">Loading...</p>;
-      if (items && searchTerm) return <p className="text-white fs-2 text-center">No items match your search.</p>; // Added message for no search results
-      return null; // Or perhaps a "No items available" message if items is initially empty
+      if (items && searchTerm) return <p className="text-white fs-2 text-center">No items match your search.</p>;
+      return null;
     }
+
     return filteredItems.map((item, index) => (
       <div
         key={index}
@@ -49,6 +55,7 @@ const Item = ({ searchTerm }) => { // Receive searchTerm prop
       </div>
     ));
   };
+
   return (
     <div className="container py-5 mx-lg-0 px-lg-0 mx-xl-3 px-xl-3 mx-xxl-5 px-xxl-5 main-items-div">
       <div className="container">
@@ -57,4 +64,5 @@ const Item = ({ searchTerm }) => { // Receive searchTerm prop
     </div>
   );
 };
+
 export default Item;
